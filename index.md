@@ -1,6 +1,7 @@
 ## About
 
-[alt text](img/bjo_photo.jpg) Brian is a Ph.D. candidate in Statistical Genetics under the mentorship of [Barbara Engelhardt](http://beehive.cs.princeton.edu/), and is part of the Graduate Program in [Quantitative and Computational Biology](http://lsi.princeton.edu/qcbgraduate) at Princeton University. Brian works with the human genome and transcriptome, and is a contributor to the [Genotype-Tissue Expression (GTEX)](http://www.gtexportal.org/home/) consortium. 
+<img align="right" src="img/bjo_photo.jpg"/>
+Brian is a Ph.D. candidate in Statistical Genetics under the mentorship of [Barbara Engelhardt](http://beehive.cs.princeton.edu/), and is part of the Graduate Program in [Quantitative and Computational Biology](http://lsi.princeton.edu/qcbgraduate) at Princeton University. Brian works with the human genome and transcriptome, and is a contributor to the [Genotype-Tissue Expression (GTEX)](http://www.gtexportal.org/home/) consortium. 
 
 #### Research Interests
 
@@ -20,7 +21,7 @@ Brian is primariliy pursuing the following research questions, all of which are 
 
 ## External Links
 
-[ORCiD](http://orcid.org/0000-0002-9641-7948) ![alt text](img/bjo_orcid_qrcode.png =250x)
+[ORCiD](http://orcid.org/0000-0002-9641-7948) <img src="img/bjo_orcid_qrcode.png" width='150px'/>!
 
 [Google Scholar](http://scholar.google.com/citations?view_op=list_works&hl=en&user=YoYxpiYAAAAJ)
 
