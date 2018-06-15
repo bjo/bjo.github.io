@@ -26,11 +26,11 @@ Abstract version of the above publication.
 
 ---
 
-## Additional publications, external Links
-
-[ORCiD](http://orcid.org/0000-0002-9641-7948) (QR code on the right) <img align='right' src="img/bjo_orcid_qrcode.png" width='100px'/>
+## Additional publications and external links
 
 [Google Scholar](http://scholar.google.com/citations?view_op=list_works&hl=en&user=YoYxpiYAAAAJ)
+
+[ORCiD](http://orcid.org/0000-0002-9641-7948) (QR code on the right) <img align='right' src="img/bjo_orcid_qrcode.png" width='100px'/>
 
 [LinkedIn](http://www.linkedin.com/in/jobrian/)
 
