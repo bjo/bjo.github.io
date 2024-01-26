@@ -1,0 +1,280 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="These are more useful than you may think!"><title>Heaps and Priority Queues - what are they and how are they useful?</title>
+<link rel=canonical href=https://bjo.github.io/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="Heaps and Priority Queues - what are they and how are they useful?"><meta property="og:description" content="These are more useful than you may think!"><meta property="og:url" content="https://bjo.github.io/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/"><meta property="og:site_name" content="Brian's Zone"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="Data Structures and Algorithms (DSA)"><meta property="article:tag" content="python"><meta property="article:published_time" content="2024-01-26T00:00:00+00:00"><meta property="article:modified_time" content="2024-01-26T00:00:00+00:00"><meta property="og:image" content="https://bjo.github.io/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/cover_1.png"><meta name=twitter:title content="Heaps and Priority Queues - what are they and how are they useful?"><meta name=twitter:description content="These are more useful than you may think!"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="https://bjo.github.io/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/cover_1.png"><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/llama_1_hu8feab206196a061c71a17d4009066397_2262376_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🤗</span></figure><div class=site-meta><h1 class=site-name><a href=/>Brian's Zone</a></h1><h2 class=site-description>cogito, ergo sum</h2></div></header><ol class=social-menu><li><a href=https://github.com/bjo/ target=_blank title=GitHub rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com target=_blank title=Twitter rel=me><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></div></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#motivation-running-medians>Motivation: Running Medians</a></li><li><a href=#heaps-to-the-rescue>Heaps to the rescue!</a><ol><li><a href=#other-useful-heapq-functions>Other useful heapq functions</a></li></ol></li><li><a href=#real-life-application-priority-queues>Real-life application: Priority queues</a></li><li><a href=#summary>Summary</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/><img src=/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/cover_1_hufbc8733ee4ad1b4f28034cbec6879b37_3188092_800x0_resize_box_3.png srcset="/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/cover_1_hufbc8733ee4ad1b4f28034cbec6879b37_3188092_800x0_resize_box_3.png 800w, /p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/cover_1_hufbc8733ee4ad1b4f28034cbec6879b37_3188092_1600x0_resize_box_3.png 1600w" width=800 height=457 loading=lazy alt="Featured image of post Heaps and Priority Queues - what are they and how are they useful?"></a></div><div class=article-details><header class=article-category><a href=/categories/data-structures-and-algorithms-dsa/>Data Structures and Algorithms (DSA)</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/>Heaps and Priority Queues - what are they and how are they useful?</a></h2><h3 class=article-subtitle>These are more useful than you may think!</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Jan 26, 2024</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>8 minute read</time></div></footer></div></header><section class=article-content><h2 id=motivation-running-medians>Motivation: Running Medians</h2><p>Let&rsquo;s say you have a rapidly streaming data, you need to keep tracking of the running mean, min and max values. Since sorting a list of values is <code>O(n log(n))</code>,
+it is not feasible to continuously calculate these relevant statistics after every update. Instead, we need to have a very efficient way of keeping track
+and updating these numbers in real time.</p><p>My motivation for writing this post actually came from a different problem; calculating the running median of a continuous stream. When it comes to the mean,
+it is straightforward: given the mean <code>M</code> and new value <code>X</code> and the current number of values <code>N</code>, the new mean is simply:</p><p>$$
+\frac{N*M+X}{N+1}
+$$</p><p>However, when it comes to the median, it is not as straightforward, since we need to know the mid-value of an ordered list! My initial approach for this was to
+keep an ordered list that inserts the new value into the right place (found by bisecting recursion) in a continuously growing array, given a list <code>input</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># Recursive method to find the right index to insert the new value</span>
+</span></span><span class=line><span class=cl><span class=c1># Runs in O(log(n))</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>get_loc</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>,</span> <span class=n>i</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Base case for recursion</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>check_ind</span> <span class=o>=</span> <span class=nb>len</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>)</span> <span class=o>//</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Recursion occurs by feeding a smaller verison of the original array and </span>
+</span></span><span class=line><span class=cl>    <span class=c1># adding the number of values that come before the split array</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>ordered_arr</span><span class=p>[</span><span class=n>check_ind</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=mi>0</span> <span class=o>+</span> <span class=n>get_loc</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>[:</span><span class=n>check_ind</span><span class=p>],</span> <span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>i</span> <span class=o>&gt;</span> <span class=n>ordered_arr</span><span class=p>[</span><span class=n>check_ind</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>check_ind</span> <span class=o>+</span> <span class=mi>1</span> <span class=o>+</span> <span class=n>get_loc</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>[</span><span class=n>check_ind</span><span class=o>+</span><span class=mi>1</span><span class=p>:],</span> <span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>check_ind</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=c1># Method that splits the list by the index discovered by get_loc(),</span>
+</span></span><span class=line><span class=cl><span class=c1># grow it, and calculate the median by looking at the middle value</span>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>runningMedianSlow</span><span class=p>(</span><span class=nb>input</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>ordered_arr</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>meds</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>incr</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>entry</span> <span class=ow>in</span> <span class=n>a</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>insert_ind</span> <span class=o>=</span> <span class=n>get_loc</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>,</span> <span class=n>entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># print(&#39;Insert %s into ind %s for %s&#39; % (entry, insert_ind, ordered_arr))</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Split, insert, and re-combine!</span>
+</span></span><span class=line><span class=cl>        <span class=n>ordered_arr</span> <span class=o>=</span> <span class=n>ordered_arr</span><span class=p>[:</span><span class=n>insert_ind</span><span class=p>]</span> <span class=o>+</span> <span class=p>[</span><span class=n>entry</span><span class=p>]</span> <span class=o>+</span> <span class=n>ordered_arr</span><span class=p>[</span><span class=n>insert_ind</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>        <span class=n>incr</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Now we can calculate the median</span>
+</span></span><span class=line><span class=cl>        <span class=n>med</span> <span class=o>=</span> <span class=n>ordered_arr</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>)</span><span class=o>//</span><span class=mi>2</span><span class=p>]</span> <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>)</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>1</span> <span class=k>else</span> \ 
+</span></span><span class=line><span class=cl>            <span class=p>(</span><span class=n>ordered_arr</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>)</span><span class=o>//</span><span class=mi>2</span><span class=p>]</span> <span class=o>+</span> <span class=n>ordered_arr</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=n>ordered_arr</span><span class=p>)</span><span class=o>//</span><span class=mi>2</span> <span class=o>-</span> <span class=mi>1</span><span class=p>])</span> <span class=o>/</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>        <span class=n>meds</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=nb>float</span><span class=p>(</span><span class=n>med</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>meds</span>
+</span></span></code></pre></td></tr></table></div></div><p>This method DOES give the right answers, but needless to say, it is inefficient, even though the run-time itself is <code>O(n log(n))</code>.
+We need to think deeper about it - if all we&rsquo;re interested in is the running median, there should be no need to keep track of this very cumbersome array that can be
+thousands, millions or billions of values!</p><p>The change in perspective comes from the fact that this is a very similar problem to keeping track of either min or max of a running list (Do you see how?)
+If I were asked to keep track of the mininum of streaming values, how would I have approached this problem? Hmm&mldr; 🤔</p><h2 id=heaps-to-the-rescue>Heaps to the rescue!</h2><p>A heap is a tree-structure that satisfies the <strong>heap property</strong>: if you want to have a max heap, the simple restriction is that your parent is larger than you (or equal).
+In a min heap, the opposite is true.</p><p><img src=/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/heap.svg.png width=220 height=264 srcset="/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/heap.svg_hu50afccbee1fb84a22be463bd8166d122_12169_480x0_resize_box_3.png 480w, /p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/heap.svg_hu50afccbee1fb84a22be463bd8166d122_12169_1024x0_resize_box_3.png 1024w" loading=lazy alt="Max heap diagram from Wikipedia" class=gallery-image data-flex-grow=83 data-flex-basis=200px></p><p>The key property that makes heaps very useful is that inserting a new value or popping the root (either max or min in a max heap or min heap, respectively) is very fast!
+In case you&rsquo;re wondering how the insertion and popping operations happen so fast, refer to the first two minutes of this video:</p><div class=video-wrapper><iframe loading=lazy src=https://www.youtube.com/embed/t0Cq6tVNRBA allowfullscreen title="YouTube Video"></iframe></div><p>So, let&rsquo;s take a quick diversion to write a function that keeps track of the running min values using a min heap; in python, this can be done using <code>heapq</code>.
+Note that in python, the root element is referred by the <code>0</code>-element:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>heapq</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>runningMin</span><span class=p>(</span><span class=nb>input</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>h</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>mins</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>entry</span> <span class=ow>in</span> <span class=n>a</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h</span><span class=p>,</span> <span class=n>entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>mins</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>h</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>mins</span>
+</span></span></code></pre></td></tr></table></div></div><p>That&rsquo;s great, but how is this problem relevent for the original problem of getting a running median? The trick is to <strong>combine</strong> a min heap and max heap; keep the smaller half of the
+elements in a max heap and the larger half of the elements in a min heap. As long as we are careful to keep the size of each heap equal (or the max heap has one more element than min heap if we have an odd number of elements),
+now getting the median value is just either taking the max element of the min heap (if there are odd number of elements) or the average of the two roots (if there are even number of elements)!</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>heapq</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>runningMedian</span><span class=p>(</span><span class=nb>input</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>h_small</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>h_large</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>meds</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Initialize - Note that I&#39;m inverting the values going into </span>
+</span></span><span class=line><span class=cl>    <span class=c1># h_small to effectively keep it a max heap</span>
+</span></span><span class=line><span class=cl>    <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h_small</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=nb>input</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>meds</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=nb>input</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h_small</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=nb>input</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>    <span class=n>meds</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=nb>input</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>+</span> <span class=nb>input</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span> <span class=o>/</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Balance the heaps - invert the sign again</span>
+</span></span><span class=line><span class=cl>    <span class=n>a</span> <span class=o>=</span> <span class=n>heapq</span><span class=o>.</span><span class=n>heappop</span><span class=p>(</span><span class=n>h_small</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h_large</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>ind</span> <span class=o>=</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Now we begin the loop</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>entry</span> <span class=ow>in</span> <span class=nb>input</span><span class=p>[</span><span class=mi>2</span><span class=p>:]:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>entry</span> <span class=o>&lt;</span> <span class=n>h_large</span><span class=p>[</span><span class=mi>0</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># insert into min heap</span>
+</span></span><span class=line><span class=cl>            <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h_small</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=n>entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h_large</span><span class=p>,</span> <span class=n>entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># Re-balance</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>h_small</span><span class=p>)</span> <span class=o>&gt;</span> <span class=nb>len</span><span class=p>(</span><span class=n>h_large</span><span class=p>)</span> <span class=o>+</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>a</span> <span class=o>=</span> <span class=n>heapq</span><span class=o>.</span><span class=n>heappop</span><span class=p>(</span><span class=n>h_small</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h_large</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>elif</span> <span class=nb>len</span><span class=p>(</span><span class=n>h_large</span><span class=p>)</span> <span class=o>&gt;</span> <span class=nb>len</span><span class=p>(</span><span class=n>h_small</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>a</span> <span class=o>=</span> <span class=n>heapq</span><span class=o>.</span><span class=n>heappop</span><span class=p>(</span><span class=n>h_large</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>heapq</span><span class=o>.</span><span class=n>heappush</span><span class=p>(</span><span class=n>h_small</span><span class=p>,</span> <span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=n>a</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>ind</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>        <span class=n>med</span> <span class=o>=</span> <span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=n>h_small</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=k>if</span> <span class=n>ind</span> <span class=o>%</span> <span class=mi>2</span> <span class=o>==</span> <span class=mi>1</span> <span class=k>else</span> <span class=p>(</span><span class=o>-</span><span class=mi>1</span><span class=o>*</span><span class=n>h_small</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>+</span> <span class=n>h_large</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span> <span class=o>/</span> <span class=mi>2</span>
+</span></span><span class=line><span class=cl>        <span class=n>meds</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>med</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>meds</span>
+</span></span></code></pre></td></tr></table></div></div><p>As you can see, each iteration involves two steps - picking which heap to insert the new value, and if needed, re-balance the number of elements in each heap. This is a much faster solution. How much faster are we talking? I ran both methods 500 times using a random list of 1000 elements (Python 3.9.17), and the first method ran in
+<code>~4.7 ms</code> while the second method ran in <code>~720 μs</code>! That is almost a 7-fold decrease, and we have a clear winner here.</p><p><img src=/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/speed_comp.png width=622 height=147 srcset="/p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/speed_comp_hucb6ef1e88fff88eec25de8b0671c55e4_61076_480x0_resize_box_3.png 480w, /p/heaps-and-priority-queues-what-are-they-and-how-are-they-useful/speed_comp_hucb6ef1e88fff88eec25de8b0671c55e4_61076_1024x0_resize_box_3.png 1024w" loading=lazy alt="Using the %timeit magic in jupyter notebook - it&rsquo;s very useful!" class=gallery-image data-flex-grow=423 data-flex-basis=1015px></p><h3 id=other-useful-heapq-functions>Other useful heapq functions</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>heapq</span><span class=o>.</span><span class=n>heapify</span><span class=p>(</span><span class=n>x</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># Transform list x into a heap, in-place, in linear time.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>heapq</span><span class=o>.</span><span class=n>merge</span><span class=p>(</span><span class=o>*</span><span class=n>iterables</span><span class=p>,</span> <span class=n>key</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span> <span class=n>reverse</span><span class=o>=</span><span class=kc>False</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># Merge multiple sorted inputs into a single sorted output (for example, </span>
+</span></span><span class=line><span class=cl><span class=c1># merge timestamped entries from multiple log files). Returns an iterator over the sorted values.</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>heapq</span><span class=o>.</span><span class=n>nlargest</span><span class=p>(</span><span class=n>n</span><span class=p>,</span> <span class=n>iterable</span><span class=p>,</span> <span class=n>key</span><span class=o>=</span><span class=kc>None</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># Return a list with the n largest elements from the dataset defined by iterable. </span>
+</span></span><span class=line><span class=cl><span class=c1># key, if provided, specifies a function of one argument that is used to extract a </span>
+</span></span><span class=line><span class=cl><span class=c1># comparison key from each element in iterable (for example, key=str.lower).</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>heapq</span><span class=o>.</span><span class=n>nsmallest</span><span class=p>(</span><span class=n>n</span><span class=p>,</span> <span class=n>iterable</span><span class=p>,</span> <span class=n>key</span><span class=o>=</span><span class=kc>None</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># Similar to nlargest, but for smallest</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>heapq</code> also provides other helpful functions, such as converting a regular array into a heap, merging two heaps, and obtaining the n-th largest or smallest values in an array (How would you implement this yourself? Hint is that it is very similar to the running median problem that we just solved.)</p><h2 id=real-life-application-priority-queues>Real-life application: Priority queues</h2><p>Another very useful real-life scenario that uses heaps is a queueing system which should respect priorities associated with each task, not simply working as a FIFO queue(First-In-First-Out). One example would be theEmergency Room, where patients with more severe conditions need to be treated with a higher priority. A very efficient implementation of such a queueing system can be written like this (example taken directly from python documentation page for heapq: <a class=link href=https://docs.python.org/3/library/heapq.html target=_blank rel=noopener>https://docs.python.org/3/library/heapq.html</a> ):</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>pq</span> <span class=o>=</span> <span class=p>[]</span>                         <span class=c1># list of entries arranged in a heap</span>
+</span></span><span class=line><span class=cl><span class=n>entry_finder</span> <span class=o>=</span> <span class=p>{}</span>               <span class=c1># mapping of tasks to entries</span>
+</span></span><span class=line><span class=cl><span class=n>REMOVED</span> <span class=o>=</span> <span class=s1>&#39;&lt;removed-task&gt;&#39;</span>      <span class=c1># placeholder for a removed task</span>
+</span></span><span class=line><span class=cl><span class=n>counter</span> <span class=o>=</span> <span class=n>itertools</span><span class=o>.</span><span class=n>count</span><span class=p>()</span>     <span class=c1># unique sequence count</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>add_task</span><span class=p>(</span><span class=n>task</span><span class=p>,</span> <span class=n>priority</span><span class=o>=</span><span class=mi>0</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Add a new task or update the priority of an existing task&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>task</span> <span class=ow>in</span> <span class=n>entry_finder</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>remove_task</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>count</span> <span class=o>=</span> <span class=nb>next</span><span class=p>(</span><span class=n>counter</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>entry</span> <span class=o>=</span> <span class=p>[</span><span class=n>priority</span><span class=p>,</span> <span class=n>count</span><span class=p>,</span> <span class=n>task</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=n>entry_finder</span><span class=p>[</span><span class=n>task</span><span class=p>]</span> <span class=o>=</span> <span class=n>entry</span>
+</span></span><span class=line><span class=cl>    <span class=n>heappush</span><span class=p>(</span><span class=n>pq</span><span class=p>,</span> <span class=n>entry</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>remove_task</span><span class=p>(</span><span class=n>task</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Mark an existing task as REMOVED.  Raise KeyError if not found.&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=n>entry</span> <span class=o>=</span> <span class=n>entry_finder</span><span class=o>.</span><span class=n>pop</span><span class=p>(</span><span class=n>task</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>entry</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=n>REMOVED</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>pop_task</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;Remove and return the lowest priority task. Raise KeyError if empty.&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=n>pq</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>priority</span><span class=p>,</span> <span class=n>count</span><span class=p>,</span> <span class=n>task</span> <span class=o>=</span> <span class=n>heappop</span><span class=p>(</span><span class=n>pq</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>task</span> <span class=ow>is</span> <span class=ow>not</span> <span class=n>REMOVED</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>del</span> <span class=n>entry_finder</span><span class=p>[</span><span class=n>task</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>task</span>
+</span></span><span class=line><span class=cl>    <span class=k>raise</span> <span class=ne>KeyError</span><span class=p>(</span><span class=s1>&#39;pop from an empty priority queue&#39;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>In this example, there are two data structures that keep track of the tasks: a priority queue (heap) <code>pq</code>, and a dictionary <code>entry_finder</code>. Keeping both data structures allows us to not only add and pop the highest priority tasks, but also to remove a specific task that is not necessarily at the root of the heap, with the <code>remove_task()</code> function.</p><h2 id=summary>Summary</h2><p>In this post, we took a deep dive into a very specific data structure - heaps. Heaps are highly efficient for managing priorities, with their ability to provide fast access to the &lsquo;highest&rsquo; or &rsquo;lowest&rsquo; value making them particularly useful in numerous real-life applications. Knowing what kinds of tasks heaps are good for, and also recognizing where they are being used, can be a very helpful tool in your DSA arsenal.</p></section><footer class=article-footer><section class=article-tags><a href=/tags/data-structures-and-algorithms-dsa/>Data Structures and Algorithms (DSA)</a>
+<a href=/tags/python/>python</a></section><section class=article-copyright><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css integrity="sha256-J+iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s=" crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js integrity="sha256-InsNdER1b2xUewP+pKCUJpkhiqwHgqiPXDlIk7GzBu4=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI=" crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.querySelector(`.article-content`),{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><div class=disqus-container><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//hugo-theme-stack.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div><style>.disqus-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}</style><script>window.addEventListener("onColorSchemeChange",e=>{typeof DISQUS=="object"&&DISQUS.reset({reload:!0})})</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2024 Brian's Zone</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.21.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
