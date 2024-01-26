@@ -19,7 +19,7 @@ subtitle = "cogito, ergo sum"
 [sidebar.avatar]
 enabled = true
 local = true
-src = "img/98421095.png"
+src = "img/llama_1.png"
 
 [article]
 math = false
